@@ -1,0 +1,271 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 1. Пользователь
+model User {
+  Id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  TelegramId BigInt   @unique @map("TelegramId")
+  Username   String   @unique @db.VarChar(255)
+  CreatedAt  DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+  IsVerified Boolean  @default(false) @map("IsVerified")
+  IsBlocked  Boolean  @default(false) @map("IsBlocked")
+
+  // Relations
+  Profile         Profile?
+  Photos          Photo[]
+  Prompts         Prompt[]
+  ReceivedReports Report[]         @relation("TargetUserReports")
+  SentReports     Report[]         @relation("FromUserReports")
+  SentMatches     Match[]          @relation("FromUserMatches")
+  ReceivedMatches Match[]          @relation("ToUserMatches")
+  Blocks          Block[]          @relation("UserBlocks")
+  BlockedBy       Block[]          @relation("BlockedUserBlocks")
+  Subscriptions   Subscription[]
+  Notifications   Notification[]
+  Interests       UserInterest[]
+  Music           UserMusic[]
+  recommendations Recommendation[]
+
+  @@index([TelegramId], map: "idx_user_telegram_id")
+  @@index([Username], map: "idx_user_username")
+  @@index([CreatedAt], map: "idx_user_created_at")
+  @@map("users")
+}
+
+// 2. Профиль пользователя
+model Profile {
+  Id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId         String  @unique @db.Uuid
+  Name           String  @db.VarChar(100)
+  Age            Int?
+  Bio            String? @db.Text
+
+  CityId         String? @db.Uuid
+
+  Interests      Json?   @db.JsonB
+  InterestsExtra String? @db.Text
+  Music          Json?   @db.JsonB
+  MusicExtra     String? @db.Text
+
+  Gender         String  @db.VarChar(20)
+
+  // Relations
+  User User @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  City City? @relation(fields: [CityId], references: [Id], onDelete: SetNull)
+
+  @@index([Age], map: "idx_profile_age")
+  @@index([Gender], map: "idx_profile_gender")
+  @@index([CityId], map: "idx_profile_city_id")
+
+  @@map("profiles")
+}
+
+model City {
+  Id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Name String @unique @db.VarChar(255)
+
+  profiles Profile[]
+
+  @@index([Name], map: "idx_city_name")
+  @@map("cities")
+}
+
+// 3. Фотография
+model Photo {
+  Id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId    String   @map("UserId") @db.Uuid
+  Url       String   @db.VarChar(512)
+  IsPrimary Boolean  @default(false) @map("IsPrimary")
+  CreatedAt DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  User User @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+
+  @@index([UserId], map: "idx_photo_user_id")
+  @@index([UserId, IsPrimary], map: "idx_photo_is_primary")
+  @@map("photos")
+}
+
+// 4. Запрос
+model Prompt {
+  Id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId    String   @map("UserId") @db.Uuid
+  Text      String   @db.Text
+  CreatedAt DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  User            User             @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  Recommendations Recommendation[]
+
+  @@index([UserId], map: "idx_prompt_user_id")
+  @@index([CreatedAt], map: "idx_prompt_created_at")
+  @@map("prompts")
+}
+
+// 5. Рекомендация
+model Recommendation {
+  Id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  PromptId     String  @map("PromptId") @db.Uuid
+  TargetUserId String  @map("TargetUserId") @db.Uuid
+  Score        Float
+  Explanation  String? @db.Text
+
+  // Relations
+  Prompt     Prompt @relation(fields: [PromptId], references: [Id], onDelete: Cascade)
+  TargetUser User   @relation(fields: [TargetUserId], references: [Id], onDelete: Cascade)
+
+  @@index([PromptId], map: "idx_recommendation_prompt_id")
+  @@index([TargetUserId], map: "idx_recommendation_target_user_id")
+  @@index([Score], map: "idx_recommendation_score")
+  @@map("recommendations")
+}
+
+// 6. Интерес (справочник)
+model Interest {
+  Id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Name String @unique @db.VarChar(100)
+
+  // Relations
+  Users UserInterest[]
+
+  @@index([Name], map: "idx_interest_name")
+  @@map("interests")
+}
+
+// 7. Связь пользователь-интерес
+model UserInterest {
+  UserId     String @map("UserId") @db.Uuid
+  InterestId String @map("InterestId") @db.Uuid
+
+  // Relations
+  User     User     @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  Interest Interest @relation(fields: [InterestId], references: [Id], onDelete: Cascade)
+
+  @@id([UserId, InterestId])
+  @@index([UserId], map: "idx_user_interest_user_id")
+  @@index([InterestId], map: "idx_user_interest_interest_id")
+  @@map("user_interests")
+}
+
+// 8. Музыка (справочник)
+model Music {
+  Id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  Name String @unique @db.VarChar(100)
+
+  // Relations
+  Users UserMusic[]
+
+  @@index([Name], map: "idx_music_name")
+  @@map("music")
+}
+
+// 9. Связь пользователь-музыка
+model UserMusic {
+  UserId  String @map("UserId") @db.Uuid
+  MusicId String @map("MusicId") @db.Uuid
+
+  // Relations
+  User  User  @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+  Music Music @relation(fields: [MusicId], references: [Id], onDelete: Cascade)
+
+  @@id([UserId, MusicId])
+  @@index([UserId], map: "idx_user_music_user_id")
+  @@index([MusicId], map: "idx_user_music_music_id")
+  @@map("user_music")
+}
+
+// 10. Запрос на общение (Match/Like)
+model Match {
+  Id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  FromUserId String   @map("FromUserId") @db.Uuid
+  ToUserId   String   @map("ToUserId") @db.Uuid
+  Status     String   @default("Pending") @db.VarChar(20)
+  CreatedAt  DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  FromUser User @relation("FromUserMatches", fields: [FromUserId], references: [Id], onDelete: Cascade)
+  ToUser   User @relation("ToUserMatches", fields: [ToUserId], references: [Id], onDelete: Cascade)
+
+  @@unique([FromUserId, ToUserId])
+  @@index([FromUserId], map: "idx_match_from_user")
+  @@index([ToUserId], map: "idx_match_to_user")
+  @@index([Status], map: "idx_match_status")
+  @@map("matches")
+}
+
+// 11. Жалоба
+model Report {
+  Id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  FromUserId   String   @map("FromUserId") @db.Uuid
+  TargetUserId String   @map("TargetUserId") @db.Uuid
+  Reason       String   @db.Text
+  CreatedAt    DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  FromUser   User @relation("FromUserReports", fields: [FromUserId], references: [Id], onDelete: Cascade)
+  TargetUser User @relation("TargetUserReports", fields: [TargetUserId], references: [Id], onDelete: Cascade)
+
+  @@index([TargetUserId], map: "idx_report_target_user")
+  @@index([FromUserId], map: "idx_report_from_user")
+  @@map("reports")
+}
+
+// 12. Блокировка
+model Block {
+  Id            String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId        String @map("UserId") @db.Uuid
+  BlockedUserId String @map("BlockedUserId") @db.Uuid
+
+  // Relations
+  User        User @relation("UserBlocks", fields: [UserId], references: [Id], onDelete: Cascade)
+  BlockedUser User @relation("BlockedUserBlocks", fields: [BlockedUserId], references: [Id], onDelete: Cascade)
+
+  @@unique([UserId, BlockedUserId])
+  @@index([UserId], map: "idx_block_user_id")
+  @@index([BlockedUserId], map: "idx_block_blocked_user_id")
+  @@map("blocks")
+}
+
+// 13. Подписка/Платеж
+model Subscription {
+  Id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId         String    @map("UserId") @db.Uuid
+  Type           String    @db.VarChar(50)
+  ExpirationDate DateTime? @map("ExpirationDate") @db.Timestamp
+  IsActive       Boolean   @default(true) @map("IsActive")
+  CreatedAt      DateTime  @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  User User @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+
+  @@index([UserId], map: "idx_subscription_user_id")
+  @@index([ExpirationDate], map: "idx_subscription_expiration_date")
+  @@index([IsActive], map: "idx_subscription_is_active")
+  @@map("subscriptions")
+}
+
+// 14. Уведомление
+model Notification {
+  Id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  UserId    String   @map("UserId") @db.Uuid
+  Type      String   @db.VarChar(50)
+  Text      String   @db.Text
+  IsRead    Boolean  @default(false) @map("IsRead")
+  CreatedAt DateTime @default(now()) @map("CreatedAt") @db.Timestamp
+
+  // Relations
+  User User @relation(fields: [UserId], references: [Id], onDelete: Cascade)
+
+  @@index([UserId], map: "idx_notification_user_id")
+  @@index([IsRead], map: "idx_notification_is_read")
+  @@index([CreatedAt], map: "idx_notification_created_at")
+  @@map("notifications")
+}
