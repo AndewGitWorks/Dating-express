@@ -22,16 +22,18 @@ export const authMiddleware = (
     if (!token) {
         return res.status(401).json({ message: "Invalid token format" });
     }
-
+    console.log("HEADERS:", req.headers);
+    console.log("AUTH:", req.headers.authorization);
     try {
-        const decoded = jwt.verify(token, env.JWT_TOKEN!) as JwtPayload;
+        const decoded = jwt.verify(token, env.JWT_TOKEN!) as any;
 
         req.user = {
-            id: decoded.id,
+            id: decoded.userId,
         };
 
         next();
-    } catch {
-        return res.status(401).json({ message: "Invalid token" });
+    } catch (e) {
+    console.log("JWT ERROR:", (e as Error).message);
+    return res.status(401).json({ message: "Invalid token" });
     }
 };

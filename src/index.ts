@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import interestsRouter from "./routes/interests.route"
 import musicRouter from "./routes/music.route"
+import profileRouter from "./routes/profile.route"
 
 import { authMiddleware } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./utils/swagger.extension";
@@ -24,7 +25,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
 app.use(morgan(
     ':method :url :status :response-time ms',
     {
@@ -50,11 +50,11 @@ app.get("/api/me", authMiddleware, (req, res) => {
 
 
 // Endpoints
-app.use(musicRouter);
 app.use(authRouter);
-app.use(interestsRouter);
+app.use("/api/music",authMiddleware,musicRouter);
+app.use("/api/interests",authMiddleware,interestsRouter);
 app.use("/api/users", userRouter);
-
+app.use("/api/profile",authMiddleware,profileRouter);
 // --- 404 ---
 app.use("/api", (_req, res) => {
     res.status(404).json({ message: "Route not found" });

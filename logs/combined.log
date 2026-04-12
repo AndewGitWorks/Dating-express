@@ -83,3 +83,40 @@ An operation failed because it depends on one or more records that were required
 [12-04-2026 12:12:41] INFO: GET /music 200 52.263 ms
 [12-04-2026 12:13:59] INFO: Server started on http://localhost:3000
 [12-04-2026 12:14:05] INFO: GET /music 200 39.234 ms
+[12-04-2026 12:53:57] INFO: Server started on http://localhost:3000
+[12-04-2026 13:03:16] INFO: Server started on http://localhost:3000
+[12-04-2026 13:03:19] INFO: POST /auth 200 62.219 ms
+[12-04-2026 13:03:31] INFO: GET /interests 200 4.498 ms
+[12-04-2026 13:04:06] INFO: POST /profile/interests/add 401 1.592 ms
+[12-04-2026 13:04:13] INFO: POST /profile/interests/add 401 0.615 ms
+[12-04-2026 13:04:25] INFO: POST /auth 200 11.869 ms
+[12-04-2026 13:04:40] INFO: POST /profile/interests/add 401 0.471 ms
+[12-04-2026 13:06:01] INFO: Server started on http://localhost:3000
+[12-04-2026 13:06:05] INFO: POST /profile/interests/add 401 3.661 ms
+[12-04-2026 13:06:18] INFO: Server started on http://localhost:3000
+[12-04-2026 13:06:49] INFO: Server started on http://localhost:3000
+[12-04-2026 13:07:30] INFO: Server started on http://localhost:3000
+[12-04-2026 13:07:33] INFO: POST /auth 200 44.107 ms
+[12-04-2026 13:07:46] INFO: POST /profile/interests/add 401 1.658 ms
+[12-04-2026 13:07:51] INFO: POST /profile/interests/add 401 0.854 ms
+[12-04-2026 13:09:40] INFO: Server started on http://localhost:3000
+[12-04-2026 13:10:08] INFO: Server started on http://localhost:3000
+[12-04-2026 13:10:15] INFO: Server started on http://localhost:3000
+[12-04-2026 13:10:24] INFO: POST /profile/add 404 2.324 ms
+[12-04-2026 13:10:36] INFO: Server started on http://localhost:3000
+[12-04-2026 13:10:43] INFO: POST /api/profile/add 404 1.912 ms
+[12-04-2026 13:11:05] INFO: Server started on http://localhost:3000
+[12-04-2026 13:11:08] INFO: POST /api/profile/add 404 1.466 ms
+[12-04-2026 13:12:20] INFO: Server started on http://localhost:3000
+[12-04-2026 13:13:06] INFO: Server started on http://localhost:3000
+[12-04-2026 13:13:09] INFO: POST /api/profile/add 404 3.662 ms
+[12-04-2026 13:13:21] INFO: POST /api/profile/interests/add 401 1.267 ms
+[12-04-2026 13:13:28] INFO: POST /auth 200 145.504 ms
+[12-04-2026 13:13:43] INFO: POST /api/profile/interests/add 401 0.551 ms
+[12-04-2026 13:15:36] INFO: Server started on http://localhost:3000
+[12-04-2026 13:15:43] INFO: POST /api/profile/interests/add 401 4.757 ms
+[12-04-2026 13:20:51] INFO: Server started on http://localhost:3000
+[12-04-2026 13:20:54] INFO: POST /api/profile/interests/add 401 4.620 ms
+[12-04-2026 13:23:34] INFO: Server started on http://localhost:3000
+[12-04-2026 13:23:36] INFO: POST /api/profile/interests/add 400 4.393 ms
+[12-04-2026 13:23:48] INFO: POST /api/profile/interests/add 200 66.992 ms
