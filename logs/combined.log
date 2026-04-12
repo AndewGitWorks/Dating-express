@@ -120,3 +120,7 @@ An operation failed because it depends on one or more records that were required
 [12-04-2026 13:23:34] INFO: Server started on http://localhost:3000
 [12-04-2026 13:23:36] INFO: POST /api/profile/interests/add 400 4.393 ms
 [12-04-2026 13:23:48] INFO: POST /api/profile/interests/add 200 66.992 ms
+[12-04-2026 16:38:33] INFO: Server started on http://localhost:3000
+[12-04-2026 16:41:38] INFO: Server started on http://localhost:3000
+[12-04-2026 16:41:41] INFO: POST /auth 200 116.699 ms
+[12-04-2026 16:44:23] INFO: POST /api/music/add 200 30.524 ms
