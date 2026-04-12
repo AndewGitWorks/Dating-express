@@ -9,6 +9,8 @@ const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const morgan_1 = __importDefault(require("morgan"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const user_route_1 = __importDefault(require("./routes/user.route"));
+const interests_route_1 = __importDefault(require("./routes/interests.route"));
+const music_route_1 = __importDefault(require("./routes/music.route"));
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const swagger_extension_1 = require("./utils/swagger.extension");
 const logger_1 = __importDefault(require("./utils/logger"));
@@ -38,7 +40,10 @@ app.get("/api/me", auth_middleware_1.authMiddleware, (req, res) => {
         userId: req.user?.userId
     });
 });
+// Endpoints
+app.use(music_route_1.default);
 app.use(auth_route_1.default);
+app.use(interests_route_1.default);
 app.use("/api/users", user_route_1.default);
 // --- 404 ---
 app.use("/api", (_req, res) => {

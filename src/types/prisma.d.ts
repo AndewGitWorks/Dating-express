@@ -1,0 +1,1 @@
+type PrismaClientOrTx = PrismaClient | Prisma.TransactionClient;

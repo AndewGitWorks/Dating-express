@@ -26,3 +26,60 @@
 [10-04-2026 06:09:34] INFO: Server started on http://localhost:3000
 [10-04-2026 06:09:52] WARN: Invalid Telegram data
 [10-04-2026 06:09:52] INFO: POST /auth/tg 403 3.966 ms
+[12-04-2026 09:26:44] INFO: Server started on http://localhost:3000
+[12-04-2026 09:27:17] INFO: POST /auth/tg 404 1.352 ms
+[12-04-2026 09:27:36] INFO: POST /auth 400 1.530 ms
+[12-04-2026 09:29:07] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[12-04-2026 09:29:07] WARN: User creation failed
+[12-04-2026 09:29:07] INFO: POST /auth 400 162.909 ms
+[12-04-2026 09:31:28] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[12-04-2026 09:31:28] WARN: User creation failed
+[12-04-2026 09:31:28] INFO: POST /auth 400 14.172 ms
+[12-04-2026 09:33:10] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[12-04-2026 09:33:10] WARN: User creation failed
+[12-04-2026 09:33:10] INFO: POST /auth 400 5.584 ms
+[12-04-2026 09:36:19] INFO: POST /auth 200 73.008 ms
+[12-04-2026 09:39:12] INFO: POST /api/me 404 0.358 ms
+[12-04-2026 09:39:18] INFO: Server started on http://localhost:3000
+[12-04-2026 09:39:21] INFO: POST /api/me 404 1.466 ms
+[12-04-2026 09:39:34] INFO: GET /api/me 200 11.730 ms
+[12-04-2026 09:53:30] WARN: User creation failed
+[12-04-2026 09:53:30] INFO: POST /auth 400 88.644 ms
+[12-04-2026 09:53:40] INFO: Server started on http://localhost:3000
+[12-04-2026 09:54:28] INFO: Server started on http://localhost:3000
+[12-04-2026 09:54:34] WARN: User creation failed
+[12-04-2026 09:54:34] INFO: POST /auth 400 85.967 ms
+[12-04-2026 10:00:32] INFO: Server started on http://localhost:3000
+[12-04-2026 10:00:37] WARN: User creation failed
+[12-04-2026 10:00:37] INFO: POST /auth 500 77.679 ms
+[12-04-2026 10:02:55] INFO: POST /auth 200 12.648 ms
+[12-04-2026 12:04:00] INFO: Server started on http://localhost:3000
+[12-04-2026 12:05:04] INFO: GET /interests 200 67.829 ms
+[12-04-2026 12:11:51] INFO: Server started on http://localhost:3000
+[12-04-2026 12:12:41] INFO: GET /music 200 52.263 ms
+[12-04-2026 12:13:59] INFO: Server started on http://localhost:3000
+[12-04-2026 12:14:05] INFO: GET /music 200 39.234 ms

@@ -47,6 +47,6 @@ const router = Router();
  *       500:
  *         description: Ошибка сервера
  */
-router.post("/auth/tg", auth);
-router.get("api/me", authMiddleware, me);
+router.post("/auth", auth);
+router.get("/api/me", authMiddleware, me);
 export default router;

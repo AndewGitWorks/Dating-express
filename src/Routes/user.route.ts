@@ -9,7 +9,8 @@ router.get("/", async(req:Request, res:Response) =>
 {
     res.json("Something");
 });
-router.get("users/:id", authMiddleware, GetUserById);
+router.get("/users/:id", authMiddleware, GetUserById);
+router.put("/users/profile", authMiddleware, );
 
 
 export default router;

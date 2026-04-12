@@ -1,25 +1,25 @@
 import { City } from "@prisma/client";
 import { CreateUserDto, UpdateUserDto } from "../DTOs/user.dto";
 import { prisma } from "../prisma";
-import { AppError } from "../exceptions/custom.exceptions";
+import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
 
-export async function UserPrismaCreate(userData: CreateUserDto, city: City) {
-    const newUser = await prisma.user.create({
+export async function UserPrismaCreate(
+    db: PrismaClientOrTx,
+    userData: CreateUserDto,
+    cityId: string
+) {
+    return db.user.create({
         data: {
             TelegramId: String(userData.telegramId),
             Username: userData.telegramName ?? `user_${userData.telegramId}`,
             Name: userData.name,
             Age: userData.age,
-            CityId: city.Id,
+            CityId: cityId,
             Gender: userData.gender,
         },
     });
-    if(!newUser)
-    {
-        throw new AppError("Server error", 500);
-    }
-    return newUser;
 }
+
 export async function UserPrismaUpdate(req: UpdateUserDto, userId: string, cityId: string)
 {
     const usr = await prisma.user.update({
@@ -52,5 +52,28 @@ export async function UserPrismaFindUnique(req: string)
             }
         }
     );
+    if(!usr)
+    {
+        throw new NotFoundError();
+    }
+    return usr;
+}
+
+export async function UserPrismaTgUnique(req: string)
+{
+    const usr = await prisma.user.findUniqueOrThrow(
+        {
+            where:{
+                TelegramId: req,
+            },
+            include:{
+                City: true
+            }
+        }
+    );
+    if(!usr)
+    {
+        throw new NotFoundError();
+    }
     return usr;
 }

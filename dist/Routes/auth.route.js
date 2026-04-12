@@ -46,6 +46,6 @@ const router = (0, express_1.Router)();
  *       500:
  *         description: Ошибка сервера
  */
-router.post("/auth/tg", auth_controller_1.auth);
-router.get("api/me", auth_middleware_1.authMiddleware, auth_controller_1.me);
+router.post("/auth", auth_controller_1.auth);
+router.get("/api/me", auth_middleware_1.authMiddleware, auth_controller_1.me);
 exports.default = router;

@@ -5,6 +5,8 @@ import morgan from "morgan";
 
 import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
+import interestsRouter from "./routes/interests.route"
+import musicRouter from "./routes/music.route"
 
 import { authMiddleware } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./utils/swagger.extension";
@@ -46,7 +48,11 @@ app.get("/api/me", authMiddleware, (req, res) => {
     });
 });
 
+
+// Endpoints
+app.use(musicRouter);
 app.use(authRouter);
+app.use(interestsRouter);
 app.use("/api/users", userRouter);
 
 // --- 404 ---

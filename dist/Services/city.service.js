@@ -9,23 +9,28 @@ async function getCityFromQueryAsync(query) {
         where: {
             Name: {
                 startsWith: query,
-                mode: 'insensitive',
-            }
+                mode: "insensitive",
+            },
         },
         take: 10,
     });
     return cityResponse;
 }
-async function getCityByName(res) {
-    const cityRes = await prisma_1.prisma.city.findFirstOrThrow({
+async function getCityByName(cityName) {
+    const normalizedCity = cityName?.trim();
+    if (!normalizedCity) {
+        throw new custom_exceptions_1.BadRequestError("city is required");
+    }
+    const cityRes = await prisma_1.prisma.city.findFirst({
         where: {
             Name: {
-                equals: res,
-            }
-        }
+                equals: normalizedCity,
+                mode: "insensitive",
+            },
+        },
     });
     if (!cityRes) {
-        throw new custom_exceptions_1.AppError(`City not found: ${name}`, 404);
+        throw new custom_exceptions_1.BadRequestError(`City: ${normalizedCity} is invalid`);
     }
     return cityRes;
 }

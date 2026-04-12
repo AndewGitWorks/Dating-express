@@ -7,5 +7,6 @@ const router = (0, express_1.Router)();
 router.get("/", async (req, res) => {
     res.json("Something");
 });
-router.get("users/:id", auth_middleware_1.authMiddleware, user_controller_1.GetUserById);
+router.get("/users/:id", auth_middleware_1.authMiddleware, user_controller_1.GetUserById);
+router.put("/users/profile", auth_middleware_1.authMiddleware);
 exports.default = router;

@@ -52,6 +52,10 @@ model Profile {
   Id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   UserId         String  @unique @db.Uuid
   Bio            String? @db.Text
+  Graduation     String? @db.Text
+  Faculty        String? @db.Text
+  Job            String? @db.Text
+  Department     String? @db.Text
   Interests      Json?   @db.JsonB
   InterestsExtra String? @db.Text
   Music          Json?   @db.JsonB

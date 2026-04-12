@@ -1,0 +1,27 @@
+[12-04-2026 09:29:07] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[12-04-2026 09:31:28] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[12-04-2026 09:33:10] ERROR: 
+Invalid `prisma.city.findFirstOrThrow()` invocation in
+C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
+
+  19 
+  20 export async function getCityByName(res: string)
+  21 {
+→ 22     const cityRes = await prisma.city.findFirstOrThrow(
+An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
