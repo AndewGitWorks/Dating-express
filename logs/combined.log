@@ -1,0 +1,28 @@
+
+[07-04-2026 12:43:29] INFO: GET /api/health 304 0.275 ms
+[07-04-2026 12:43:29] INFO: GET /favicon.ico 404 0.415 ms
+[07-04-2026 12:43:36] INFO: GET / 404 0.261 ms
+[07-04-2026 12:44:48] INFO: Server started on http://localhost:3000
+[07-04-2026 12:44:50] INFO: GET /auth/tg 404 2.017 ms
+[07-04-2026 12:48:31] INFO: Server started on http://localhost:3000
+[07-04-2026 12:48:36] INFO: Server started on http://localhost:3000
+[07-04-2026 12:49:50] INFO: GET /api/health 200 1.732 ms
+[07-04-2026 12:51:18] INFO: GET /api/health 200 0.301 ms
+[07-04-2026 12:56:37] INFO: Server started on http://localhost:3000
+[07-04-2026 12:57:31] INFO: GET /api/me 401 2.249 ms
+[07-04-2026 13:00:48] INFO: GET /auth/tg 404 0.724 ms
+[07-04-2026 13:01:46] INFO: POST /auth/tg 404 0.198 ms
+[07-04-2026 13:04:25] INFO: Server started on http://localhost:3000
+[07-04-2026 13:04:30] WARN: initData is missing
+[07-04-2026 13:04:30] INFO: POST /auth/tg 400 2.663 ms
+[07-04-2026 13:06:07] WARN: Invalid Telegram data
+[07-04-2026 13:06:07] INFO: POST /auth/tg 403 2.342 ms
+[07-04-2026 13:09:00] WARN: Invalid Telegram data
+[07-04-2026 13:09:00] INFO: POST /auth/tg 403 1.085 ms
+[08-04-2026 04:03:53] INFO: Server started on http://localhost:3000
+[08-04-2026 04:04:07] INFO: GET / 404 3.182 ms
+[08-04-2026 04:04:21] INFO: GET /api/health 304 2.289 ms
+[08-04-2026 04:04:21] INFO: GET /favicon.ico 404 1.054 ms
+[10-04-2026 06:09:34] INFO: Server started on http://localhost:3000
+[10-04-2026 06:09:52] WARN: Invalid Telegram data
+[10-04-2026 06:09:52] INFO: POST /auth/tg 403 3.966 ms

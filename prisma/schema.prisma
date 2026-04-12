@@ -12,8 +12,12 @@ datasource db {
 // 1. Пользователь
 model User {
   Id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  TelegramId BigInt   @unique @map("TelegramId")
+  TelegramId String   @unique @map("TelegramId")
   Username   String   @unique @db.VarChar(255)
+  Name           String  @db.VarChar(100)
+  Age            Int?
+  CityId         String? @db.Uuid
+  Gender         String  @db.VarChar(20)
   CreatedAt  DateTime @default(now()) @map("CreatedAt") @db.Timestamp
   IsVerified Boolean  @default(false) @map("IsVerified")
   IsBlocked  Boolean  @default(false) @map("IsBlocked")
@@ -33,10 +37,13 @@ model User {
   Interests       UserInterest[]
   Music           UserMusic[]
   recommendations Recommendation[]
-
+  City City? @relation(fields: [CityId], references: [Id], onDelete: SetNull)
   @@index([TelegramId], map: "idx_user_telegram_id")
+  @@index([Age], map: "idx_profile_age")
   @@index([Username], map: "idx_user_username")
   @@index([CreatedAt], map: "idx_user_created_at")
+  @@index([CityId], map: "idx_profile_city_id")
+  @@index([Gender], map: "idx_profile_gender")
   @@map("users")
 }
 
@@ -44,26 +51,15 @@ model User {
 model Profile {
   Id             String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   UserId         String  @unique @db.Uuid
-  Name           String  @db.VarChar(100)
-  Age            Int?
   Bio            String? @db.Text
-
-  CityId         String? @db.Uuid
-
   Interests      Json?   @db.JsonB
   InterestsExtra String? @db.Text
   Music          Json?   @db.JsonB
   MusicExtra     String? @db.Text
 
-  Gender         String  @db.VarChar(20)
 
   // Relations
   User User @relation(fields: [UserId], references: [Id], onDelete: Cascade)
-  City City? @relation(fields: [CityId], references: [Id], onDelete: SetNull)
-
-  @@index([Age], map: "idx_profile_age")
-  @@index([Gender], map: "idx_profile_gender")
-  @@index([CityId], map: "idx_profile_city_id")
 
   @@map("profiles")
 }
@@ -72,7 +68,7 @@ model City {
   Id   String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   Name String @unique @db.VarChar(255)
 
-  profiles Profile[]
+  User User[]
 
   @@index([Name], map: "idx_city_name")
   @@map("cities")

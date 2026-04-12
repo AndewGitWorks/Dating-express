@@ -1,10 +1,9 @@
-import { Router } from "express";
-import { auth, me } from "../controllers/auth.controller";
-import { authMiddleware } from "../middleware/auth.middleware";
-
-
-const router = Router();
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_controller_1 = require("../controllers/auth.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const router = (0, express_1.Router)();
 /**
  * @swagger
  * /auth/tg:
@@ -47,6 +46,6 @@ const router = Router();
  *       500:
  *         description: Ошибка сервера
  */
-router.post("/auth/tg", auth);
-router.get("api/me", authMiddleware, me);
-export default router;
+router.post("/auth/tg", auth_controller_1.auth);
+router.get("api/me", auth_middleware_1.authMiddleware, auth_controller_1.me);
+exports.default = router;

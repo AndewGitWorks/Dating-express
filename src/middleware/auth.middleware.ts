@@ -1,26 +1,37 @@
-import { Request, Response, NextFunction, response, request } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { env } from "../env";
+
+interface JwtPayload {
+    id: string;
+}
 
 export const authMiddleware = (
     req: Request,
     res: Response,
-    next: NextFunction,
-) =>{
-
+    next: NextFunction
+) => {
     const auth = req.headers.authorization;
 
-    if(!auth){
-        return res.status(401).json({message:"No token"});
+    if (!auth) {
+        return res.status(401).json({ message: "No token" });
     }
 
     const token = auth.split(" ")[1];
 
-    try{
-        const decode = jwt.verify(token, env.JWT_TOKEN!) as any;
-        req.user = decode;
-        next();
-    }catch{
-        return res.status(401).json({message:"Invalid token"});
+    if (!token) {
+        return res.status(401).json({ message: "Invalid token format" });
     }
-}
+
+    try {
+        const decoded = jwt.verify(token, env.JWT_TOKEN!) as JwtPayload;
+
+        req.user = {
+            id: decoded.id,
+        };
+
+        next();
+    } catch {
+        return res.status(401).json({ message: "Invalid token" });
+    }
+};

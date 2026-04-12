@@ -1,60 +1,55 @@
-import { NextFunction, Request, Response } from "express";
-import checkTelegramAuth from "../Bot/validation";
-import { env } from "../env";
-import { prisma } from "../prisma";
-import { signToken } from "../utils/jwt";
-import logger from "../utils/logger";
-import { createUser } from "../services/user.service";
-
-export const auth = async (req: Request, res: Response) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.me = exports.auth = void 0;
+const prisma_1 = require("../prisma");
+const jwt_1 = require("../utils/jwt");
+const logger_1 = __importDefault(require("../utils/logger"));
+const user_service_1 = require("../services/user.service");
+const auth = async (req, res) => {
     try {
         const userData = req.body;
-
         if (!userData?.telegramId) {
             return res.status(400).json({
                 message: "telegramId required",
             });
         }
-
-        let telegramId: string;
-
+        let telegramId;
         try {
             telegramId = (userData.telegramId);
-        } catch {
+        }
+        catch {
             return res.status(400).json({
                 message: "Invalid telegramId",
             });
         }
-
-        let user = await prisma.user.findUnique({
+        let user = await prisma_1.prisma.user.findUnique({
             where: {
                 TelegramId: String(telegramId),
             },
         });
-
         if (!user) {
             try {
-                user = await createUser(userData);
-            } catch (e) {
-                logger.warn('User creation failed', {
-                    error: (e as Error).message,
+                user = await (0, user_service_1.createUser)(userData);
+            }
+            catch (e) {
+                logger_1.default.warn('User creation failed', {
+                    error: e.message,
                     userData,
                 });
-
-                if ((e as Error).message.includes('City not found')) {
+                if (e.message.includes('City not found')) {
                     return res.status(400).json({
-                        message: (e as Error).message,
+                        message: e.message,
                     });
                 }
-
                 return res.status(400).json({
                     message: "Failed to create user",
                 });
             }
         }
-
-        const token = signToken(user.Id);
-
+        const token = (0, jwt_1.signToken)(user.Id);
         return res.json({
             token,
             user: {
@@ -62,21 +57,20 @@ export const auth = async (req: Request, res: Response) => {
                 username: user.Username,
             },
         });
-
-    } catch (error) {
-        logger.error('Auth error', {
+    }
+    catch (error) {
+        logger_1.default.error('Auth error', {
             error: error instanceof Error ? error.message : error,
         });
-
         return res.status(500).json({
             message: "Internal server error",
         });
     }
 };
-
-export const me = async (req:Request, res: Response, next: NextFunction) =>
-{
+exports.auth = auth;
+const me = async (req, res, next) => {
     res.json({
-        userId: (req as any).user?.userId
+        userId: req.user?.userId
     }) ?? next();
-}
+};
+exports.me = me;
