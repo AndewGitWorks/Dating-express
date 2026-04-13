@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const music_controller_1 = require("../controllers/music.controller");
+const interests_controller_1 = require("../controllers/interests.controller");
 const router = (0, express_1.Router)();
-router.get("/all", music_controller_1.GetMusic);
-router.post("/add", music_controller_1.AddMusicToUser);
+router.post("/interests/add", interests_controller_1.AddInterestsToUser);
 exports.default = router;

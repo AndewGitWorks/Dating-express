@@ -55,6 +55,7 @@ app.use("/api/music",authMiddleware,musicRouter);
 app.use("/api/interests",authMiddleware,interestsRouter);
 app.use("/api/users", userRouter);
 app.use("/api/profile",authMiddleware,profileRouter);
+app.use("/api/prompt", authMiddleware);
 // --- 404 ---
 app.use("/api", (_req, res) => {
     res.status(404).json({ message: "Route not found" });

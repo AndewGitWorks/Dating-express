@@ -15,14 +15,17 @@ const authMiddleware = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: "Invalid token format" });
     }
+    console.log("HEADERS:", req.headers);
+    console.log("AUTH:", req.headers.authorization);
     try {
         const decoded = jsonwebtoken_1.default.verify(token, env_1.env.JWT_TOKEN);
         req.user = {
-            id: decoded.id,
+            id: decoded.userId,
         };
         next();
     }
-    catch {
+    catch (e) {
+        console.log("JWT ERROR:", e.message);
         return res.status(401).json({ message: "Invalid token" });
     }
 };

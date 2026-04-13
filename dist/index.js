@@ -11,6 +11,7 @@ const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const user_route_1 = __importDefault(require("./routes/user.route"));
 const interests_route_1 = __importDefault(require("./routes/interests.route"));
 const music_route_1 = __importDefault(require("./routes/music.route"));
+const profile_route_1 = __importDefault(require("./routes/profile.route"));
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const swagger_extension_1 = require("./utils/swagger.extension");
 const logger_1 = __importDefault(require("./utils/logger"));
@@ -41,10 +42,11 @@ app.get("/api/me", auth_middleware_1.authMiddleware, (req, res) => {
     });
 });
 // Endpoints
-app.use(music_route_1.default);
 app.use(auth_route_1.default);
-app.use(interests_route_1.default);
+app.use("/api/music", auth_middleware_1.authMiddleware, music_route_1.default);
+app.use("/api/interests", auth_middleware_1.authMiddleware, interests_route_1.default);
 app.use("/api/users", user_route_1.default);
+app.use("/api/profile", auth_middleware_1.authMiddleware, profile_route_1.default);
 // --- 404 ---
 app.use("/api", (_req, res) => {
     res.status(404).json({ message: "Route not found" });

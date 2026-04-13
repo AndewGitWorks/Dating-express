@@ -1,6 +1,8 @@
-import { NotFoundError } from "../exceptions/custom.exceptions";
+import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
 import { AddExtraInterestsToUserRepository, AddInterestsToUserRepository, GetInterestsByNames } from "../repository/interests.repository";
 import { AddExtraMusicToUserRepository, AddMusicToUserRepository, GetMusicByName } from "../repository/music.repository";
+import { PromptPrismaCreate } from "../repository/prompt.repository";
+import { UserPrismaFindUnique } from "../repository/user.repository";
 
 
 export async function AddInterestsToUserService(
@@ -47,6 +49,16 @@ export async function AddExtraMusicToUserService(
     await AddExtraMusicToUserRepository(userId, extra_interest);
 }
 
-function GetMusicByNames(interests: string[]) {
-    throw new Error("Function not implemented.");
+
+export async function CreatePromptService(
+    userId: string, text: string
+)
+{
+    const result = await PromptPrismaCreate(userId, text);
+    if(!result)
+    {
+        throw new AppError("Invalid server while creating prompt");
+    }
+    return result;
 }
+
