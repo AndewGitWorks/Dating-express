@@ -1,6 +1,7 @@
 import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
 import { AddExtraInterestsToUserRepository, AddInterestsToUserRepository, GetInterestsByNames } from "../repository/interests.repository";
 import { AddExtraMusicToUserRepository, AddMusicToUserRepository, GetMusicByName } from "../repository/music.repository";
+import { ProfilePrismaAddBio } from "../repository/profile.repository";
 import { PromptPrismaCreate } from "../repository/prompt.repository";
 import { UserPrismaFindUnique } from "../repository/user.repository";
 
@@ -62,3 +63,16 @@ export async function CreatePromptService(
     return result;
 }
 
+
+export async function AddBioService(
+    userId: string,
+    bio: string
+)
+{
+    const result = await ProfilePrismaAddBio(userId, bio);
+    if(!result)
+    {
+        throw new AppError("Internal server error");
+    }
+    return result;
+}

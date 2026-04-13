@@ -8,6 +8,8 @@ import userRouter from "./routes/user.route";
 import interestsRouter from "./routes/interests.route"
 import musicRouter from "./routes/music.route"
 import profileRouter from "./routes/profile.route"
+import promptRouter from "./routes/prompt.route"
+
 
 import { authMiddleware } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./utils/swagger.extension";
@@ -51,11 +53,15 @@ app.get("/api/me", authMiddleware, (req, res) => {
 
 // Endpoints
 app.use(authRouter);
-app.use("/api/music",authMiddleware,musicRouter);
-app.use("/api/interests",authMiddleware,interestsRouter);
-app.use("/api/users", userRouter);
-app.use("/api/profile",authMiddleware,profileRouter);
-app.use("/api/prompt", authMiddleware);
+app.use("/api/music", authMiddleware, musicRouter);
+app.use("/api/interests", authMiddleware, interestsRouter);
+app.use("/api/users", authMiddleware, userRouter);
+app.use("/api/profile", authMiddleware, profileRouter);
+app.use("/api/prompt", authMiddleware, promptRouter);
+
+
+
+
 // --- 404 ---
 app.use("/api", (_req, res) => {
     res.status(404).json({ message: "Route not found" });

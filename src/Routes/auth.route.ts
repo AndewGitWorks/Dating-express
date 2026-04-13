@@ -48,5 +48,5 @@ const router = Router();
  *         description: Ошибка сервера
  */
 router.post("/auth", auth);
-router.get("/api/me", authMiddleware, me);
+router.get("/me", authMiddleware, me);
 export default router;

@@ -35,3 +35,20 @@ export async function ProfilePrismaInterests(
     });
 }
 
+export async function ProfilePrismaAddBio(
+    userId: string,
+    bio: string
+) {
+    return prisma.profile.upsert({
+        where: {
+            UserId: userId,
+        },
+        update: {
+            Bio: bio,
+        },
+        create: {
+            UserId: userId,
+            Bio: bio,
+        },
+    });
+}
