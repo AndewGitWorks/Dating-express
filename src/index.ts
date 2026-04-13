@@ -9,12 +9,13 @@ import interestsRouter from "./routes/interests.route"
 import musicRouter from "./routes/music.route"
 import profileRouter from "./routes/profile.route"
 import promptRouter from "./routes/prompt.route"
-
+import photoRouter from "./routes/photo.route"
 
 import { authMiddleware } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./utils/swagger.extension";
 import logger from "./utils/logger";
 import { errorMiddleware } from "./middleware/exception.middleware";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,6 +52,7 @@ app.get("/api/me", authMiddleware, (req, res) => {
 });
 
 
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 // Endpoints
 app.use(authRouter);
 app.use("/api/music", authMiddleware, musicRouter);
@@ -58,8 +60,7 @@ app.use("/api/interests", authMiddleware, interestsRouter);
 app.use("/api/users", authMiddleware, userRouter);
 app.use("/api/profile", authMiddleware, profileRouter);
 app.use("/api/prompt", authMiddleware, promptRouter);
-
-
+app.use("/api/photos", photoRouter);
 
 
 // --- 404 ---

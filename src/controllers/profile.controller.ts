@@ -10,3 +10,6 @@ export const AddBio = async (req:Request, res: Response) =>
     await AddBioService(userId, bioText);
     return res.status(200).json({message: "Bio added"});
 }
+
+
+
