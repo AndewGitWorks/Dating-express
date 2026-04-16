@@ -12,10 +12,13 @@ const user_route_1 = __importDefault(require("./routes/user.route"));
 const interests_route_1 = __importDefault(require("./routes/interests.route"));
 const music_route_1 = __importDefault(require("./routes/music.route"));
 const profile_route_1 = __importDefault(require("./routes/profile.route"));
+const prompt_route_1 = __importDefault(require("./routes/prompt.route"));
+const photo_route_1 = __importDefault(require("./routes/photo.route"));
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const swagger_extension_1 = require("./utils/swagger.extension");
 const logger_1 = __importDefault(require("./utils/logger"));
 const exception_middleware_1 = require("./middleware/exception.middleware");
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 // --- Middlewares ---
@@ -41,12 +44,16 @@ app.get("/api/me", auth_middleware_1.authMiddleware, (req, res) => {
         userId: req.user?.userId
     });
 });
+// Static files (photos for profiles)
+app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "../uploads")));
 // Endpoints
 app.use(auth_route_1.default);
 app.use("/api/music", auth_middleware_1.authMiddleware, music_route_1.default);
 app.use("/api/interests", auth_middleware_1.authMiddleware, interests_route_1.default);
-app.use("/api/users", user_route_1.default);
+app.use("/api/users", auth_middleware_1.authMiddleware, user_route_1.default);
 app.use("/api/profile", auth_middleware_1.authMiddleware, profile_route_1.default);
+app.use("/api/prompt", auth_middleware_1.authMiddleware, prompt_route_1.default);
+app.use("/api/photos", auth_middleware_1.authMiddleware, photo_route_1.default);
 // --- 404 ---
 app.use("/api", (_req, res) => {
     res.status(404).json({ message: "Route not found" });

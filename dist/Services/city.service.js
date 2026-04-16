@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCityFromQueryAsync = getCityFromQueryAsync;
 exports.getCityByName = getCityByName;
+exports.UpdateUserCity = UpdateUserCity;
 const prisma_1 = require("../prisma");
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
 async function getCityFromQueryAsync(query) {
@@ -33,4 +34,22 @@ async function getCityByName(cityName) {
         throw new custom_exceptions_1.BadRequestError(`City: ${normalizedCity} is invalid`);
     }
     return cityRes;
+}
+async function UpdateUserCity(userId, newCity) {
+    const updatedUser = await prisma_1.prisma.user.update({
+        where: {
+            Id: userId
+        },
+        data: {
+            City: {
+                connect: {
+                    Name: newCity
+                }
+            }
+        },
+        include: {
+            City: true
+        }
+    });
+    return updatedUser;
 }

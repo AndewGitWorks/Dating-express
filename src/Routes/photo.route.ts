@@ -1,14 +1,17 @@
 import { Router } from "express";
-import { GetMyPhotosController, GetMyPhotosWithPrimaryController, GetMyPrimaryPhotoController } from "../controllers/user.controller";
+import { GetMyPhotosController, GetMyPhotosWithPrimaryController, GetMyPrimaryPhotoController, UploadPhotoController } from "../controllers/user.controller";
+import { upload } from "../middleware/uploads.middleware";
 
 
 const router = Router();
 
-router.get("/me/photos", GetMyPhotosController);
+router.get("/photos", GetMyPhotosController);
 
-router.get("/me/photos/full", GetMyPhotosWithPrimaryController);
+router.get("/full", GetMyPhotosWithPrimaryController);
 
-router.get("/me/photos/primary", GetMyPrimaryPhotoController);
+router.get("/primary", GetMyPrimaryPhotoController);
+
+router.post("/upload", upload.single("file"),UploadPhotoController);
 
 // router.get("/users/:userId/photos", GetUserPhotosController);
 

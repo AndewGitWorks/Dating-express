@@ -6,6 +6,7 @@ import logger from "../utils/logger";
 import { createUser } from "../services/user.service";
 import { UserPrismaTgUnique } from "../repository/user.repository";
 
+
 function validateCreateUserRequest(body: any) {
     if (!body?.telegramId) {
         throw new BadRequestError("telegramId is required");
@@ -37,6 +38,7 @@ function validateCreateUserRequest(body: any) {
 
     return body;
 }
+
 
 export const auth = async (req: Request, res: Response) => {
     try {
@@ -88,6 +90,7 @@ export const auth = async (req: Request, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
 
 export const me = async (req: Request, res: Response, next: NextFunction) => {
     res.json({

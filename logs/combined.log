@@ -124,3 +124,37 @@ An operation failed because it depends on one or more records that were required
 [12-04-2026 16:41:38] INFO: Server started on http://localhost:3000
 [12-04-2026 16:41:41] INFO: POST /auth 200 116.699 ms
 [12-04-2026 16:44:23] INFO: POST /api/music/add 200 30.524 ms
+[13-04-2026 10:06:41] INFO: Server started on http://localhost:3000
+[13-04-2026 10:06:43] INFO: GET / 404 2.196 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/ 304 2.096 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/swagger-ui-init.js 200 0.252 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/swagger-ui.css 304 1.470 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/swagger-ui-bundle.js 304 0.739 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/swagger-ui-standalone-preset.js 304 0.458 ms
+[13-04-2026 10:07:02] INFO: GET /api-docs/favicon-16x16.png 200 1.863 ms
+[15-04-2026 05:49:21] INFO: Server started on http://localhost:3000
+[15-04-2026 06:28:23] INFO: Server started on http://localhost:3000
+[15-04-2026 06:28:25] INFO: POST /auth 200 78.642 ms
+[15-04-2026 06:28:52] INFO: GET /music 404 1.251 ms
+[15-04-2026 06:29:04] INFO: GET /music 404 0.279 ms
+[15-04-2026 06:29:09] INFO: GET /music 404 0.442 ms
+[15-04-2026 06:29:53] INFO: GET /api/music 404 11.114 ms
+[15-04-2026 06:29:56] INFO: Server started on http://localhost:3000
+[15-04-2026 06:30:07] INFO: GET /api/music/all 200 55.144 ms
+[15-04-2026 06:33:32] INFO: Server started on http://localhost:3000
+[15-04-2026 06:33:33] INFO: Server started on http://localhost:3000
+[15-04-2026 06:33:55] INFO: Server started on http://localhost:3000
+[15-04-2026 06:34:32] INFO: Server started on http://localhost:3000
+[15-04-2026 06:34:33] INFO: Server started on http://localhost:3000
+[15-04-2026 06:34:42] INFO: Server started on http://localhost:3000
+[15-04-2026 06:36:46] INFO: POST /api/photos/upload 400 4.676 ms
+[15-04-2026 06:36:57] INFO: POST /api/photos/upload 400 1.217 ms
+[15-04-2026 06:37:07] INFO: POST /api/photos/upload 400 1.150 ms
+[15-04-2026 06:37:48] INFO: Server started on http://localhost:3000
+[15-04-2026 06:37:51] INFO: POST /api/photos/upload 400 6.015 ms
+[15-04-2026 06:40:21] INFO: Server started on http://localhost:3000
+[15-04-2026 06:42:01] INFO: Server started on http://localhost:3000
+[15-04-2026 06:43:11] INFO: Server started on http://localhost:3000
+[15-04-2026 06:43:14] INFO: POST /api/photos/upload 200 132.398 ms
+[15-04-2026 06:47:50] INFO: Server started on http://localhost:3000
+[15-04-2026 06:49:17] INFO: POST /api/photos/upload 200 116.555 ms

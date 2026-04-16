@@ -13,7 +13,7 @@ export async function SaveUserPhoto(
     }
 
     const fileName = `user-${userId}-${Date.now()}.webp`;
-    const filePath = path.join(__dirname, "../../uploads", fileName);
+    const filePath = path.join(__dirname, "../uploads", fileName);
 
     await sharp(file.buffer)
         .resize(800, 800, { fit: "cover" })

@@ -13,6 +13,8 @@ export const GetMusic = async(req:Request, res:Response) =>
         });
     }
 };
+
+
 export const AddMusicToUser = async (req: Request, res: Response) => {
     try {
         const userId = (req as any).user?.id;

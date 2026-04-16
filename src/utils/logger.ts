@@ -4,9 +4,11 @@ import fs from 'fs';
 
 const logDir = path.join(__dirname, '../../logs');
 
+
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
 }
+
 
 // Красивый формат для консоли
 const consoleFormat = winston.format.combine(
@@ -19,6 +21,7 @@ const consoleFormat = winston.format.combine(
     })
 );
 
+
 // ТАКОЙ ЖЕ красивый формат для файла (убираем JSON)
 const fileFormat = winston.format.combine(
     winston.format.timestamp({
@@ -28,6 +31,7 @@ const fileFormat = winston.format.combine(
         return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
     })
 );
+
 
 const logger = winston.createLogger({
     level: 'info',
@@ -46,5 +50,6 @@ const logger = winston.createLogger({
         }),
     ],
 });
+
 
 export default logger;

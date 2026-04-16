@@ -1,6 +1,8 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
+
 const PORT = process.env.PORT || 3000;
+
 
 const options: swaggerJSDoc.Options = {
     definition: {
@@ -27,5 +29,6 @@ const options: swaggerJSDoc.Options = {
     },
     apis: ['./src/routes/*.ts', './src/index.ts'],
 };
+
 
 export const swaggerSpec = swaggerJSDoc(options);

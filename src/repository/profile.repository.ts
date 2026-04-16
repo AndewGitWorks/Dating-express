@@ -1,3 +1,4 @@
+import { join } from "path";
 import { prisma } from "../prisma";
 
 export async function ProfilePrismaCreate(
@@ -51,4 +52,61 @@ export async function ProfilePrismaAddBio(
             Bio: bio,
         },
     });
+}
+
+
+export async function GetUserSimpleProfile(usrId: string) {
+    return await prisma.user.findFirstOrThrow({
+        where: {
+            Id: usrId
+        },
+        select: {
+            Name: true,
+            Age: true,
+        },
+    })
+}
+
+
+export async function getUserFullProfile(userId: string) {
+    const response = await prisma.user.findFirstOrThrow({
+        where: { Id: userId },
+        select: {
+            Name: true,
+            Age: true,
+
+            City: {
+                select: { Name: true }
+            },
+
+            Photos: {
+                select: { Url: true }
+            },
+
+            Profile: {
+                select: {
+                    Bio: true,
+                    InterestsExtra: true,
+                    MusicExtra: true,
+                }
+            },
+
+            Interests: {
+                select: {
+                    Interest: {
+                        select: { Name: true }
+                    }
+                }
+            },
+
+            Music: {
+                select: {
+                    Music: {
+                        select: { Name: true }
+                    }
+                }
+            }
+        }
+    });
+    return response;
 }

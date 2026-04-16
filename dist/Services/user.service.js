@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createUser = createUser;
 exports.GetUserByIdAsync = GetUserByIdAsync;
@@ -7,6 +10,7 @@ const custom_exceptions_1 = require("../exceptions/custom.exceptions");
 const prisma_1 = require("../prisma");
 const profile_repository_1 = require("../repository/profile.repository");
 const user_repository_1 = require("../repository/user.repository");
+const logger_1 = __importDefault(require("../utils/logger"));
 const city_service_1 = require("./city.service");
 // export async function (cityRequest : string){
 //     const city = await prisma.city.findFirst({
@@ -31,6 +35,7 @@ async function createUser(userData) {
     const result = await prisma_1.prisma.$transaction(async (tx) => {
         const user = await (0, user_repository_1.UserPrismaCreate)(tx, userData, city.Id);
         await (0, profile_repository_1.ProfilePrismaCreate)(tx, user.Id);
+        logger_1.default.warn("Create user transaction failed");
         return user;
     });
     return result;

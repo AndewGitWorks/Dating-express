@@ -32,7 +32,7 @@ export async function createUser(userData: CreateUserDto) {
         const user = await UserPrismaCreate(tx, userData, city.Id);
 
         await ProfilePrismaCreate(tx, user.Id);
-
+        logger.warn("Create user transaction failed");
         return user;
     });
 
@@ -49,8 +49,9 @@ export async function GetUserByIdAsync(userId: string): Promise<GetUserResponse>
         city: usr.City?.Name,
     };
 
-    return response;
+return response;
 }
+
 
 export async function GetUserByTgIdAsync(tgId: string) : Promise<GetUserResponse>
 {

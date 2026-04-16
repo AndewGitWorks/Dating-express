@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const user_controller_1 = require("../controllers/user.controller");
+const router = (0, express_1.Router)();
+router.get("/photos", user_controller_1.GetMyPhotosController);
+router.get("/full", user_controller_1.GetMyPhotosWithPrimaryController);
+router.get("/primary", user_controller_1.GetMyPrimaryPhotoController);
+router.post("/upload", user_controller_1.UploadPhotoController);
+// router.get("/users/:userId/photos", GetUserPhotosController);
+exports.default = router;

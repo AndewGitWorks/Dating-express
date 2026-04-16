@@ -1,5 +1,5 @@
 import { prisma } from "../prisma";
-import { BadRequestError, AppError } from "../exceptions/custom.exceptions";
+import { BadRequestError, AppError, NotFoundError } from "../exceptions/custom.exceptions";
 
 export async function getCityFromQueryAsync(query: string) {
     const cityResponse = await prisma.city.findMany({
@@ -34,4 +34,25 @@ export async function getCityByName(cityName: string) {
     }
 
     return cityRes;
+}
+
+
+export async function UpdateUserCity(userId: string, newCity: string) {
+    const updatedUser = await prisma.user.update({
+        where: {
+            Id: userId
+        },
+        data: {
+            City: {
+                connect: {
+                    Name: newCity 
+                }
+            }
+        },
+        include: {
+            City: true
+        }
+    });
+
+    return updatedUser;
 }

@@ -27,6 +27,21 @@ export const ResetPrimaryPhotos = (userId: string, tx: any) => {
     });
 };
 
+export const GetPrimaryByUserId = async (userId: string) =>
+{
+    return prisma.photo.findFirstOrThrow(
+        {
+            where:{
+                UserId: userId,
+                IsPrimary: true
+            },
+            select:{
+                Url: true
+            }
+        }
+    );
+}
+
 export const SetPrimaryPhotoDb = (photoId: string, tx: any) => {
     return tx.photo.update({
         where: { Id: photoId },

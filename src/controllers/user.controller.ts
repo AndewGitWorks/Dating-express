@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
-import { NotFoundError } from "../exceptions/custom.exceptions";
+import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
 import { GetUserByIdAsync } from "../services/user.service";
 import { SaveUserPhoto } from "../services/photo.service";
 import { prisma } from "../prisma";
+import logger from "../utils/logger";
+import { GetUserSimpleProfileService } from "../services/profile.service";
 
 
 
@@ -25,8 +27,10 @@ export const GetUserById = async (req: Request, res: Response) => {
 
 export const UploadPhotoController = async (req: Request, res: Response) => {
     const file = req.file;
-    const userId = req.body.userId;
+    const userId = (req as any).user?.id;
 
+    console.log(req.file);
+    console.log(req.body);
     if (!file) {
         return res.status(400).json({ message: "File is required" });
     }
@@ -113,3 +117,28 @@ export const GetMyPrimaryPhotoController = async (req: Request, res: Response) =
 
 //     res.json(photos);
 // };
+
+
+export const GetUserSimpleProfileAsync = async (req:Request, res: Response) =>
+{
+    const profileId = req.body;
+    try
+    {
+        const usr = await GetUserSimpleProfileService(profileId);
+        return res.status(200).json(usr);
+    }catch(e)
+    {
+        if(e instanceof AppError)
+        {
+            logger.error(`Failed to get profile: ${e.message}`);
+            return res.status(e.statusCode).json(e.message);
+        }
+    }
+}
+
+export const GetUserFullProfileAsync = async(req:Request, res:Response)=>
+{
+    const userId = (res as any).user?.id;
+    const profileId = req.body;
+    
+}
