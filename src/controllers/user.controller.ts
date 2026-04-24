@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
+import { AppError, BadRequestError, NotFoundError } from "../exceptions/custom.exceptions";
 import { GetUserByIdAsync } from "../services/user.service";
 import { SaveUserPhoto } from "../services/photo.service";
 import { prisma } from "../prisma";
 import logger from "../utils/logger";
-import { GetUserSimpleProfileService } from "../services/profile.service";
+import { GetUserFullProfileService, GetUserSimpleProfileService } from "../services/profile.service";
 
 
 
@@ -139,6 +139,12 @@ export const GetUserSimpleProfileAsync = async (req:Request, res: Response) =>
 export const GetUserFullProfileAsync = async(req:Request, res:Response)=>
 {
     const userId = (res as any).user?.id;
-    const profileId = req.body;
-    
+    const {profileId} = req.params;
+    if(!profileId)
+    {
+        throw new BadRequestError("Wrong address");
+        return res.status(404).json({message: "Need userId to get profile"})
+    }
+    const userProfileResponse = await GetUserFullProfileService(String(profileId));
+    return res.status(200).json(userProfileResponse);
 }
