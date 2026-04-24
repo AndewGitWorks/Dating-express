@@ -77,3 +77,8 @@ export async function UserPrismaTgUnique(req: string)
     }
     return usr;
 }
+
+// export async function GetFullUserDataAsync(profileId: string)
+// {
+//     const response = await prisma.
+// }
