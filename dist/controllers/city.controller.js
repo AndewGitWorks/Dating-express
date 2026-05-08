@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChangeCity = exports.GetCities = void 0;
-const city_service_1 = require("../services/city.service");
+const city_service_1 = require("../Services/city.service");
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
 const logger_1 = __importDefault(require("../utils/logger"));
 const GetCities = async (req, res, next) => {

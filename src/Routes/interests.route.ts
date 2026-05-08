@@ -5,6 +5,6 @@ import { GetInterests } from "../controllers/interests.controller";
 
 const router = Router();
 
-router.get("/interests", GetInterests);
+router.get("/show", GetInterests);
 
 export default router;

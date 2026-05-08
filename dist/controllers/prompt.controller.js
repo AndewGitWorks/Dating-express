@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePrompt = void 0;
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
-const profile_service_1 = require("../services/profile.service");
+const profile_service_1 = require("../Services/profile.service");
 const CreatePrompt = async (req, res) => {
     const data = req.body;
     if (!data) {

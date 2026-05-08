@@ -3,7 +3,7 @@ import { BadRequestError, AppError } from "../exceptions/custom.exceptions";
 import { prisma } from "../prisma";
 import { signToken } from "../utils/jwt";
 import logger from "../utils/logger";
-import { createUser } from "../services/user.service";
+import { createUser } from "../Services/user.service";
 import { UserPrismaTgUnique } from "../repository/user.repository";
 
 

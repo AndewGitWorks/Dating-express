@@ -50,7 +50,7 @@ async function UserPrismaFindUnique(req) {
     return usr;
 }
 async function UserPrismaTgUnique(req) {
-    const usr = await prisma_1.prisma.user.findUniqueOrThrow({
+    const usr = await prisma_1.prisma.user.findUnique({
         where: {
             TelegramId: req,
         },
@@ -58,8 +58,9 @@ async function UserPrismaTgUnique(req) {
             City: true
         }
     });
-    if (!usr) {
-        throw new custom_exceptions_1.NotFoundError();
-    }
     return usr;
 }
+// export async function GetFullUserDataAsync(profileId: string)
+// {
+//     const response = await prisma.
+// }

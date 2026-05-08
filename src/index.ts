@@ -3,13 +3,13 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 
-import authRouter from "./routes/auth.route"
-import userRouter from "./routes/user.route"
-import interestsRouter from "./routes/interests.route"
-import musicRouter from "./routes/music.route"
-import profileRouter from "./routes/profile.route"
-import promptRouter from "./routes/prompt.route"
-import photoRouter from "./routes/photo.route"
+import authRouter from "./Routes/auth.route"
+import userRouter from "./Routes/user.route"
+import interestsRouter from "./Routes/interests.route"
+import musicRouter from "./Routes/music.route"
+import profileRouter from "./Routes/profile.route"
+import promptRouter from "./Routes/prompt.route"
+import photoRouter from "./Routes/photo.route"
 
 import { authMiddleware } from "./middleware/auth.middleware";
 import { swaggerSpec } from "./utils/swagger.extension";

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AddBioService } from "../services/profile.service";
+import { AddBioService } from "../Services/profile.service";
 
 
 

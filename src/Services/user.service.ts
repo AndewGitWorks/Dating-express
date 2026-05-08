@@ -56,6 +56,9 @@ return response;
 export async function GetUserByTgIdAsync(tgId: string) : Promise<GetUserResponse>
 {
     const usr = await UserPrismaTgUnique(tgId);
+    if (!usr) {
+        throw new NotFoundError("User not found");
+    }
     const response: GetUserResponse = {
         name: usr.Name,
         gender: usr.Gender,

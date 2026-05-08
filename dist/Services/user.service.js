@@ -52,6 +52,9 @@ async function GetUserByIdAsync(userId) {
 }
 async function GetUserByTgIdAsync(tgId) {
     const usr = await (0, user_repository_1.UserPrismaTgUnique)(tgId);
+    if (!usr) {
+        throw new custom_exceptions_1.NotFoundError("User not found");
+    }
     const response = {
         name: usr.Name,
         gender: usr.Gender,

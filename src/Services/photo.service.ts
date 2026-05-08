@@ -24,7 +24,7 @@ export async function SaveUserPhoto(
 }
 
 export const SetPrimaryPhoto = async (userId: string, photoId: string) => {
-    return prisma.$transaction(async (tx) => {
+    return prisma.$transaction(async (tx: any) => {
         await ResetPrimaryPhotos(userId, tx);
         return SetPrimaryPhotoDb(photoId, tx);
     });

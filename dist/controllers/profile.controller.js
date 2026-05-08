@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddBio = void 0;
-const profile_service_1 = require("../services/profile.service");
+const profile_service_1 = require("../Services/profile.service");
 const AddBio = async (req, res) => {
     const bioText = req.body;
     const userId = req.user?.id;

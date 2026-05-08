@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { GetAllInterests } from "../repository/interests.repository";
-import { AddExtraInterestsToUserService, AddInterestsToUserService } from "../services/profile.service";
+import { AddExtraInterestsToUserService, AddInterestsToUserService } from "../Services/profile.service";
 
 
 

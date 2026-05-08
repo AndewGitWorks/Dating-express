@@ -25,7 +25,7 @@ export async function ProfilePrismaInterests(
         },
     });
 
-    const data = dbInterests.map((interest) => ({
+    const data = dbInterests.map((interest: { Id: any; }) => ({
         UserId: userId,
         InterestId: interest.Id,
     }));

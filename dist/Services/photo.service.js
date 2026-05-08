@@ -15,7 +15,7 @@ async function SaveUserPhoto(file, userId) {
         throw new Error("Invalid file type");
     }
     const fileName = `user-${userId}-${Date.now()}.webp`;
-    const filePath = path_1.default.join(__dirname, "../../uploads", fileName);
+    const filePath = path_1.default.join(__dirname, "../uploads", fileName);
     await (0, sharp_1.default)(file.buffer)
         .resize(800, 800, { fit: "cover" })
         .webp({ quality: 80 })

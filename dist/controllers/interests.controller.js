@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddInterestsToUser = exports.GetInterests = void 0;
 const interests_repository_1 = require("../repository/interests.repository");
-const profile_service_1 = require("../services/profile.service");
+const profile_service_1 = require("../Services/profile.service");
 const GetInterests = async (req, res) => {
     try {
         const interest = await (0, interests_repository_1.GetAllInterests)();

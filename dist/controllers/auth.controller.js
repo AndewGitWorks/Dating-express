@@ -7,7 +7,7 @@ exports.me = exports.auth = void 0;
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
 const jwt_1 = require("../utils/jwt");
 const logger_1 = __importDefault(require("../utils/logger"));
-const user_service_1 = require("../services/user.service");
+const user_service_1 = require("../Services/user.service");
 const user_repository_1 = require("../repository/user.repository");
 function validateCreateUserRequest(body) {
     if (!body?.telegramId) {

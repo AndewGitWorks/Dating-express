@@ -25,3 +25,9 @@ C:\Users\usr\Desktop\dating-backend\src\services\city.service.ts:22:39
   21 {
 → 22     const cityRes = await prisma.city.findFirstOrThrow(
 An operation failed because it depends on one or more records that were required but not found. No record was found for a query.
+[06-05-2026 02:48:28] ERROR: Auth error
+[06-05-2026 02:49:03] ERROR: Auth error
+[06-05-2026 02:49:04] ERROR: Auth error
+[06-05-2026 02:59:36] ERROR: Auth error
+[06-05-2026 02:59:44] ERROR: Auth error
+[06-05-2026 03:02:29] ERROR: Auth error {"error":"\nInvalid `prisma_1.prisma.user.findUniqueOrThrow()` invocation in\n/Users/usrenjoyer/development/node/dating/Dating-express/dist/repository/user.repository.js:53:44\n\n  50     return usr;\n  51 }\n  52 async function UserPrismaTgUnique(req) {\n→ 53     const usr = await prisma_1.prisma.user.findUniqueOrThrow(\nAn operation failed because it depends on one or more records that were required but not found. No record was found for a query."}

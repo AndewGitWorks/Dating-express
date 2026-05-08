@@ -3,13 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUserSimpleProfileAsync = exports.GetMyPrimaryPhotoController = exports.GetMyPhotosWithPrimaryController = exports.GetMyPhotosController = exports.UploadPhotoController = exports.GetUserById = void 0;
+exports.GetUserFullProfileAsync = exports.GetUserSimpleProfileAsync = exports.GetMyPrimaryPhotoController = exports.GetMyPhotosWithPrimaryController = exports.GetMyPhotosController = exports.UploadPhotoController = exports.GetUserById = void 0;
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
-const user_service_1 = require("../services/user.service");
-const photo_service_1 = require("../services/photo.service");
+const user_service_1 = require("../Services/user.service");
+const photo_service_1 = require("../Services/photo.service");
 const prisma_1 = require("../prisma");
 const logger_1 = __importDefault(require("../utils/logger"));
-const profile_service_1 = require("../services/profile.service");
+const profile_service_1 = require("../Services/profile.service");
 const GetUserById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -27,6 +27,8 @@ exports.GetUserById = GetUserById;
 const UploadPhotoController = async (req, res) => {
     const file = req.file;
     const userId = req.user?.id;
+    console.log(req.file);
+    console.log(req.body);
     if (!file) {
         return res.status(400).json({ message: "File is required" });
     }
@@ -65,7 +67,7 @@ const GetMyPhotosWithPrimaryController = async (req, res) => {
         where: { UserId: userId },
         orderBy: { CreatedAt: "asc" },
     });
-    const primary = photos.find(p => p.IsPrimary);
+    const primary = photos.find((p) => p.IsPrimary);
     res.json({
         primary,
         photos,
@@ -108,3 +110,14 @@ const GetUserSimpleProfileAsync = async (req, res) => {
     }
 };
 exports.GetUserSimpleProfileAsync = GetUserSimpleProfileAsync;
+const GetUserFullProfileAsync = async (req, res) => {
+    const userId = res.user?.id;
+    const { profileId } = req.params;
+    if (!profileId) {
+        throw new custom_exceptions_1.BadRequestError("Wrong address");
+        return res.status(404).json({ message: "Need userId to get profile" });
+    }
+    const userProfileResponse = await (0, profile_service_1.GetUserFullProfileService)(String(profileId));
+    return res.status(200).json(userProfileResponse);
+};
+exports.GetUserFullProfileAsync = GetUserFullProfileAsync;

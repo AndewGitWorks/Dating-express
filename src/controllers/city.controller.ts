@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { getCityByName, getCityFromQueryAsync, UpdateUserCity } from "../services/city.service";
+import { getCityByName, getCityFromQueryAsync, UpdateUserCity } from "../Services/city.service";
 import { AppError } from "../exceptions/custom.exceptions";
 import logger from "../utils/logger";
 

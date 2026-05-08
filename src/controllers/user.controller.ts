@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { AppError, BadRequestError, NotFoundError } from "../exceptions/custom.exceptions";
-import { GetUserByIdAsync } from "../services/user.service";
-import { SaveUserPhoto } from "../services/photo.service";
+import { GetUserByIdAsync } from "../Services/user.service";
+import { SaveUserPhoto } from "../Services/photo.service";
 import { prisma } from "../prisma";
 import logger from "../utils/logger";
-import { GetUserFullProfileService, GetUserSimpleProfileService } from "../services/profile.service";
+import { GetUserFullProfileService, GetUserSimpleProfileService } from "../Services/profile.service";
 
 
 
@@ -80,7 +80,7 @@ export const GetMyPhotosWithPrimaryController = async (req: Request, res: Respon
         orderBy: { CreatedAt: "asc" },
     });
 
-    const primary = photos.find(p => p.IsPrimary);
+    const primary = photos.find((p: { IsPrimary: any; }) => p.IsPrimary);
 
     res.json({
         primary,

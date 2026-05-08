@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppError, BadRequestError } from "../exceptions/custom.exceptions";
-import { CreatePromptService } from "../services/profile.service";
+import { CreatePromptService } from "../Services/profile.service";
 
 
 

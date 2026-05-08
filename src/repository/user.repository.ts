@@ -1,4 +1,3 @@
-import { City } from "@prisma/client";
 import { CreateUserDto, UpdateUserDto } from "../DTOs/user.dto";
 import { prisma } from "../prisma";
 import { AppError, NotFoundError } from "../exceptions/custom.exceptions";
@@ -61,7 +60,7 @@ export async function UserPrismaFindUnique(req: string)
 
 export async function UserPrismaTgUnique(req: string)
 {
-    const usr = await prisma.user.findUniqueOrThrow(
+    const usr = await prisma.user.findUnique(
         {
             where:{
                 TelegramId: req,
@@ -71,10 +70,6 @@ export async function UserPrismaTgUnique(req: string)
             }
         }
     );
-    if(!usr)
-    {
-        throw new NotFoundError();
-    }
     return usr;
 }
 

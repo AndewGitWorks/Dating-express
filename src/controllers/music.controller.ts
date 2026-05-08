@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { GetAllMusic } from "../repository/music.repository";
-import { AddExtraMusicToUserService, AddMusicToUserService } from "../services/profile.service";
+import { AddExtraMusicToUserService, AddMusicToUserService } from "../Services/profile.service";
 
 export const GetMusic = async(req:Request, res:Response) =>
 {

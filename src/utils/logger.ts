@@ -16,8 +16,9 @@ const consoleFormat = winston.format.combine(
     winston.format.timestamp({
         format: 'DD-MM-YYYY HH:mm:ss',
     }),
-    winston.format.printf(({ level, message, timestamp }) => {
-        return `[${timestamp}] ${level}: ${message}`;
+    winston.format.printf(({ level, message, timestamp, ...meta }) => {
+        const metaStr = Object.keys(meta).length > 0 ? JSON.stringify(meta) : '';
+        return `[${timestamp}] ${level}: ${message}${metaStr ? ' ' + metaStr : ''}`;
     })
 );
 
@@ -27,8 +28,9 @@ const fileFormat = winston.format.combine(
     winston.format.timestamp({
         format: 'DD-MM-YYYY HH:mm:ss',
     }),
-    winston.format.printf(({ level, message, timestamp }) => {
-        return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
+    winston.format.printf(({ level, message, timestamp, ...meta }) => {
+        const metaStr = Object.keys(meta).length > 0 ? JSON.stringify(meta) : '';
+        return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr ? ' ' + metaStr : ''}`;
     })
 );
 

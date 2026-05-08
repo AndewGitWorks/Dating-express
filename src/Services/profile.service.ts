@@ -106,14 +106,14 @@ export async function GetUserFullProfileService(profileId: string) {
         age: profile.Age ?? null,
         city: profile.City?.Name ?? undefined,
 
-        photo_urls: profile.Photos?.map(p => p.Url),
+        photo_urls: profile.Photos?.map((p: { Url: any; }) => p.Url),
 
         bio: profile.Profile?.Bio ?? undefined,
         interests_extra: profile.Profile?.InterestsExtra ?? undefined,
         music_extra: profile.Profile?.MusicExtra ?? undefined,
 
-        interests: profile.Interests?.map(i => i.Interest.Name),
-        music: profile.Music?.map(m => m.Music.Name),
+        interests: profile.Interests?.map((i: { Interest: { Name: any; }; }) => i.Interest.Name),
+        music: profile.Music?.map((m: { Music: { Name: any; }; }) => m.Music.Name),
     };
 
     return response;

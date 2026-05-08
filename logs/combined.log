@@ -158,3 +158,51 @@ An operation failed because it depends on one or more records that were required
 [15-04-2026 06:43:14] INFO: POST /api/photos/upload 200 132.398 ms
 [15-04-2026 06:47:50] INFO: Server started on http://localhost:3000
 [15-04-2026 06:49:17] INFO: POST /api/photos/upload 200 116.555 ms
+[06-05-2026 02:46:21] INFO: Server started on http://localhost:3000
+[06-05-2026 02:46:23] INFO: GET / 404 1.129 ms
+[06-05-2026 02:48:20] INFO: GET /api/me 401 6.637 ms
+[06-05-2026 02:48:28] ERROR: Auth error
+[06-05-2026 02:48:28] INFO: POST /auth 500 39.088 ms
+[06-05-2026 02:49:03] ERROR: Auth error
+[06-05-2026 02:49:03] INFO: POST /auth 500 3.178 ms
+[06-05-2026 02:49:04] ERROR: Auth error
+[06-05-2026 02:49:04] INFO: POST /auth 500 3.595 ms
+[06-05-2026 02:59:19] INFO: Server started on http://localhost:3000
+[06-05-2026 02:59:36] ERROR: Auth error
+[06-05-2026 02:59:36] INFO: POST /auth 500 50.034 ms
+[06-05-2026 02:59:41] INFO: GET /api/me 401 10.171 ms
+[06-05-2026 02:59:44] ERROR: Auth error
+[06-05-2026 02:59:44] INFO: POST /auth 500 4.671 ms
+[06-05-2026 03:02:03] INFO: Server started on http://localhost:3000
+[06-05-2026 03:02:29] ERROR: Auth error {"error":"\nInvalid `prisma_1.prisma.user.findUniqueOrThrow()` invocation in\n/Users/usrenjoyer/development/node/dating/Dating-express/dist/repository/user.repository.js:53:44\n\n  50     return usr;\n  51 }\n  52 async function UserPrismaTgUnique(req) {\n→ 53     const usr = await prisma_1.prisma.user.findUniqueOrThrow(\nAn operation failed because it depends on one or more records that were required but not found. No record was found for a query."}
+[06-05-2026 03:02:29] INFO: POST /auth 500 15.987 ms
+[06-05-2026 03:05:09] INFO: Server started on http://localhost:3000
+[06-05-2026 03:05:22] WARN: User creation failed {"error":"City: Moscow is invalid","userData":{"telegramId":123456,"name":"John","gender":"M","age":25,"city":"Moscow"}}
+[06-05-2026 03:05:22] INFO: POST /auth 400 19.408 ms
+[06-05-2026 03:05:32] WARN: User creation failed {"error":"City: New York is invalid","userData":{"telegramId":123456,"name":"John","gender":"M","age":25,"city":"New York"}}
+[06-05-2026 03:05:32] INFO: POST /auth 400 1.455 ms
+[06-05-2026 03:05:51] INFO: GET /city/q?q=a 404 0.601 ms
+[06-05-2026 16:22:13] INFO: Server started on http://localhost:3000
+[06-05-2026 16:22:17] INFO: GET / 404 1.991 ms
+[06-05-2026 16:22:30] INFO: GET /health 404 0.649 ms
+[06-05-2026 16:22:40] INFO: GET /api/health 200 1.735 ms
+[06-05-2026 18:27:27] INFO: Server started on http://localhost:3000
+[06-05-2026 18:28:02] WARN: Create user transaction failed
+[06-05-2026 18:28:02] INFO: POST /auth 200 48.346 ms
+[06-05-2026 18:28:34] INFO: GET /interests 404 1.965 ms
+[06-05-2026 18:30:21] INFO: GET /interests 404 0.660 ms
+[06-05-2026 18:30:32] INFO: GET /interests 404 0.141 ms
+[06-05-2026 18:30:33] INFO: GET /interests 404 0.380 ms
+[06-05-2026 18:30:42] INFO: GET /api/music/all 401 5.065 ms
+[06-05-2026 18:30:54] INFO: GET /api/music/all 200 4.870 ms
+[06-05-2026 18:36:22] INFO: Server started on http://localhost:3000
+[06-05-2026 18:36:34] INFO: GET /interests/show 404 2.052 ms
+[06-05-2026 18:36:59] INFO: GET /api/interests/show 401 2.065 ms
+[06-05-2026 18:39:07] INFO: GET /api/interests/show 200 26.305 ms
+[07-05-2026 17:59:01] INFO: Server started on http://localhost:3000
+[07-05-2026 17:59:03] INFO: GET / 404 1.885 ms
+[07-05-2026 17:59:32] INFO: POST /auth 200 27.749 ms
+[07-05-2026 18:00:05] INFO: POST /api/photos/upload 200 60.110 ms
+[07-05-2026 18:00:17] INFO: GET /uploads/user-b6da9b63-8014-4762-af50-e42979bdf281-1778166005131.webp 404 1.388 ms
+[08-05-2026 17:12:45] INFO: Server started on http://localhost:3000
+[08-05-2026 17:12:46] INFO: GET / 404 0.938 ms

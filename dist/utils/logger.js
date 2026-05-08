@@ -13,14 +13,16 @@ if (!fs_1.default.existsSync(logDir)) {
 // Красивый формат для консоли
 const consoleFormat = winston_1.default.format.combine(winston_1.default.format.colorize(), winston_1.default.format.timestamp({
     format: 'DD-MM-YYYY HH:mm:ss',
-}), winston_1.default.format.printf(({ level, message, timestamp }) => {
-    return `[${timestamp}] ${level}: ${message}`;
+}), winston_1.default.format.printf(({ level, message, timestamp, ...meta }) => {
+    const metaStr = Object.keys(meta).length > 0 ? JSON.stringify(meta) : '';
+    return `[${timestamp}] ${level}: ${message}${metaStr ? ' ' + metaStr : ''}`;
 }));
 // ТАКОЙ ЖЕ красивый формат для файла (убираем JSON)
 const fileFormat = winston_1.default.format.combine(winston_1.default.format.timestamp({
     format: 'DD-MM-YYYY HH:mm:ss',
-}), winston_1.default.format.printf(({ level, message, timestamp }) => {
-    return `[${timestamp}] ${level.toUpperCase()}: ${message}`;
+}), winston_1.default.format.printf(({ level, message, timestamp, ...meta }) => {
+    const metaStr = Object.keys(meta).length > 0 ? JSON.stringify(meta) : '';
+    return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr ? ' ' + metaStr : ''}`;
 }));
 const logger = winston_1.default.createLogger({
     level: 'info',

@@ -7,6 +7,7 @@ exports.AddExtraMusicToUserService = AddExtraMusicToUserService;
 exports.CreatePromptService = CreatePromptService;
 exports.AddBioService = AddBioService;
 exports.GetUserSimpleProfileService = GetUserSimpleProfileService;
+exports.GetUserFullProfileService = GetUserFullProfileService;
 const custom_exceptions_1 = require("../exceptions/custom.exceptions");
 const interests_repository_1 = require("../repository/interests.repository");
 const music_repository_1 = require("../repository/music.repository");
@@ -62,4 +63,19 @@ async function GetUserSimpleProfileService(profileId) {
         avatar: photo.Url,
     };
     return res;
+}
+async function GetUserFullProfileService(profileId) {
+    const profile = await (0, profile_repository_1.getUserFullProfile)(profileId);
+    const response = {
+        name: profile.Name ?? undefined,
+        age: profile.Age ?? null,
+        city: profile.City?.Name ?? undefined,
+        photo_urls: profile.Photos?.map(p => p.Url),
+        bio: profile.Profile?.Bio ?? undefined,
+        interests_extra: profile.Profile?.InterestsExtra ?? undefined,
+        music_extra: profile.Profile?.MusicExtra ?? undefined,
+        interests: profile.Interests?.map(i => i.Interest.Name),
+        music: profile.Music?.map(m => m.Music.Name),
+    };
+    return response;
 }
